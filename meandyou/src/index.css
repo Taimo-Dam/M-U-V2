@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f0f0f;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  background: #0f0f0f;
+}
+
+.main-content {
+  margin-top: 70px;
+  margin-left: 80px;
+  padding: 20px;
+  min-height: calc(100vh - 70px);
+}

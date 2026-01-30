@@ -1,0 +1,97 @@
+.song-card {
+    background: rgba(18,18,18,0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.song-card:hover {
+    background: rgba(255, 0, 255, 0.08);
+    transform: translateY(-8px);
+    border-color: rgba(255, 0, 255, 0.3);
+    box-shadow: 0 12px 30px rgba(255, 0, 255, 0.15);
+}
+
+.song-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.3);
+}
+
+.song-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.song-card:hover .song-image img {
+    transform: scale(1.08);
+}
+
+.play-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #ff00ff, #00ffff);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(255, 0, 255, 0.2);
+}
+
+.song-card:hover .play-btn {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.play-btn:hover {
+    transform: scale(1.25);
+    box-shadow: 0 6px 25px rgba(255, 0, 255, 0.4);
+}
+
+.song-info h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+
+.song-info p {
+    margin: 6px 0 0 0;
+    font-size: 12px;
+    color: #aaaaaa;
+    transition: color 0.3s ease;
+}
+
+.song-card:hover .song-info p {
+    color: #00ffff;
+}
+
+.duration {
+    font-size: 11px;
+    color: #888888;
+    margin-top: 4px;
+    display: block;
+}
+
