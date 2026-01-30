@@ -7,8 +7,7 @@ export default function Hero({ sidebarOpen }) {
             <p>
                 On our website, you can access an amazing collection of<br />
                 popular and new songs. Stream your favorite tracks in high<br />
-                quality and enjoy without interruptions. Whatever your taste in<br />
-                music, we have it all for you!
+                quality and enjoy without interruptions. Whatever your taste in music, we have it all for you!
             </p>
             <button className="button1"><a href="#discover">Discover now</a></button>
             <button className="button2">Create Playlist</button>
