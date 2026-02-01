@@ -13,7 +13,6 @@ const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <BrowserRouter>
     <Router>
       <div className="app-container">
         <Header />
@@ -31,7 +30,6 @@ const App = () => {
         <Footer />
       </div>
     </Router>
-    </BrowserRouter>
   );
 }
 
