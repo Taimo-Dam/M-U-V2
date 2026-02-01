@@ -1,0 +1,101 @@
+
+*::before,
+*::after {
+  cursor: url('../assets/images/cursors/Asahina_Mafuyu.ani'), auto;
+}
+
+
+a,
+button,
+select,
+summary,
+[role="button"],
+[role="tab"],
+[role="menuitem"],
+[role="option"],
+.clickable {
+  cursor: url('../assets/images/cursors/Mafuyu_Link.ani'), pointer;
+}
+
+
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+textarea,
+[contenteditable="true"] {
+  cursor: url('../assets/images/cursors/Mafuyu_Text.ani'), text;
+}
+
+
+.loading,
+[aria-busy="true"] {
+  cursor: url('../assets/images/cursors/Mafuyu_Busy.ani'), wait;
+}
+
+
+.working {
+  cursor: url('../assets/images/cursors/Mafuyu_Working.ani'), progress;
+}
+
+
+abbr,
+.help-icon {
+  cursor: url('../assets/images/cursors/Mafuyu_Help.ani'), help;
+}
+
+
+:disabled,
+[disabled],
+[aria-disabled="true"],
+.disabled {
+  cursor: url('../assets/images/cursors/Mafuyu_Unavailable.ani'), not-allowed !important;
+}
+
+
+.draggable,
+[draggable="true"] {
+  cursor: url('../assets/images/cursors/Mafuyu_Move.ani'), grab;
+}
+
+.dragging {
+  cursor: url('../assets/images/cursors/Mafuyu_Move.ani'), grabbing;
+}
+
+
+.resize-h {
+  cursor: url('../assets/images/cursors/Mafuyu_Horizontal.ani'), ew-resize;
+}
+
+.resize-v {
+  cursor: url('../assets/images/cursors/Mafuyu_Vertical.ani'), ns-resize;
+}
+
+.resize-d1 {
+  cursor: url('../assets/images/cursors/Mafuyu_Diagonal_1.ani'), nwse-resize;
+}
+
+.resize-d2 {
+  cursor: url('../assets/images/cursors/Mafuyu_Diagonal_2.ani'), nesw-resize;
+}
+
+
+.crosshair {
+  cursor: url('../assets/images/cursors/Mafuyu_Precision.ani'), crosshair;
+}
+
+
+.context-menu {
+  cursor: url('../assets/images/cursors/Mafuyu_Alternate.ani'), context-menu;
+}
+
+
+.location {
+  cursor: url('../assets/images/cursors/Mafuyu_Location.ani'), pointer;
+}
+
+
+.person {
+  cursor: url('../assets/images/cursors/Mafuyu_Person.ani'), pointer;
+}
+
+.handwriting {
+  cursor: url('../assets/images/cursors/Mafuyu_Handwriting.ani'), text;
+}

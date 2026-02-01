@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Songs from './pages/Songs';
 import Albums from './pages/Albums';
 import Artists from './pages/Artists';
+import './styles/cursors.css';
 import './styles/App.css';
 
 const App = () => {
