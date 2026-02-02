@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -7,11 +7,14 @@ import Home from './pages/Home';
 import Songs from './pages/Songs';
 import Albums from './pages/Albums';
 import Artists from './pages/Artists';
-import './styles/cursors.css';
+import { useGlobalCursors } from "./styles/cursors.jsx";
 import './styles/App.css';
 
-const App = () => {
+function App (){
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    useGlobalCursors();
+ 
 
   return (
     <Router>

@@ -1,10 +1,21 @@
+/* ==============================================
+   Asahina Mafuyu Custom Cursor Set
+   By: PandieBonf — Personal noncommercial use only
+   Converted: .ani → .png (cross-platform)
+   ============================================== */
 
+/* ─────────────────────────────────────────────
+   1. DEFAULT — toàn site
+   ───────────────────────────────────────────── */
+*,
 *::before,
 *::after {
-  cursor: url('../assets/images/cursors/Asahina_Mafuyu.ani'), auto;
+  cursor: url('../assets/images/cursors/Asahina_Mafuyu.png') 10 0, auto;
 }
 
-
+/* ─────────────────────────────────────────────
+   2. POINTER — link, button, clickable
+   ───────────────────────────────────────────── */
 a,
 button,
 select,
@@ -14,88 +25,122 @@ summary,
 [role="menuitem"],
 [role="option"],
 .clickable {
-  cursor: url('../assets/images/cursors/Mafuyu_Link.ani'), pointer;
+  cursor: url('../assets/images/cursors/Mafuyu_Link.png') 10 0, pointer;
 }
 
-
+/* ─────────────────────────────────────────────
+   3. TEXT — input, textarea
+   ───────────────────────────────────────────── */
 input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
 textarea,
 [contenteditable="true"] {
-  cursor: url('../assets/images/cursors/Mafuyu_Text.ani'), text;
+  cursor: url('../assets/images/cursors/Mafuyu_Text.png') 10 0, text;
 }
 
-
+/* ─────────────────────────────────────────────
+   4. BUSY — loading state
+   Usage: thêm class "loading" vào element
+   ───────────────────────────────────────────── */
 .loading,
 [aria-busy="true"] {
-  cursor: url('../assets/images/cursors/Mafuyu_Busy.ani'), wait;
+  cursor: url('../assets/images/cursors/Mafuyu_Busy.png') 10 0, wait;
 }
 
-
+/* ─────────────────────────────────────────────
+   5. WORKING — processing
+   Usage: thêm class "working" vào element
+   ───────────────────────────────────────────── */
 .working {
-  cursor: url('../assets/images/cursors/Mafuyu_Working.ani'), progress;
+  cursor: url('../assets/images/cursors/Mafuyu_Working.png') 10 0, progress;
 }
 
-
+/* ─────────────────────────────────────────────
+   6. HELP — info / hint
+   Usage: thêm class "help-icon" vào element
+   ───────────────────────────────────────────── */
 abbr,
 .help-icon {
-  cursor: url('../assets/images/cursors/Mafuyu_Help.ani'), help;
+  cursor: url('../assets/images/cursors/Mafuyu_Help.png') 10 0, help;
 }
 
-
+/* ─────────────────────────────────────────────
+   7. UNAVAILABLE — disabled
+   ───────────────────────────────────────────── */
 :disabled,
 [disabled],
 [aria-disabled="true"],
 .disabled {
-  cursor: url('../assets/images/cursors/Mafuyu_Unavailable.ani'), not-allowed !important;
+  cursor: url('../assets/images/cursors/Mafuyu_Unavailable.png') 10 0, not-allowed !important;
 }
 
-
+/* ─────────────────────────────────────────────
+   8. MOVE / GRAB — drag & drop
+   Usage: thêm class "draggable" vào element
+   ───────────────────────────────────────────── */
 .draggable,
 [draggable="true"] {
-  cursor: url('../assets/images/cursors/Mafuyu_Move.ani'), grab;
+  cursor: url('../assets/images/cursors/Mafuyu_Move.png') 10 0, grab;
 }
 
 .dragging {
-  cursor: url('../assets/images/cursors/Mafuyu_Move.ani'), grabbing;
+  cursor: url('../assets/images/cursors/Mafuyu_Move.png') 10 0, grabbing;
 }
 
-
+/* ─────────────────────────────────────────────
+   9. RESIZE
+   ───────────────────────────────────────────── */
 .resize-h {
-  cursor: url('../assets/images/cursors/Mafuyu_Horizontal.ani'), ew-resize;
+  cursor: url('../assets/images/cursors/Mafuyu_Horizontal.png') 16 16, ew-resize;
 }
 
 .resize-v {
-  cursor: url('../assets/images/cursors/Mafuyu_Vertical.ani'), ns-resize;
+  cursor: url('../assets/images/cursors/Mafuyu_Vertical.png') 16 16, ns-resize;
 }
 
 .resize-d1 {
-  cursor: url('../assets/images/cursors/Mafuyu_Diagonal_1.ani'), nwse-resize;
+  cursor: url('../assets/images/cursors/Mafuyu_Diagonal_1.png') 16 16, nwse-resize;
 }
 
 .resize-d2 {
-  cursor: url('../assets/images/cursors/Mafuyu_Diagonal_2.ani'), nesw-resize;
+  cursor: url('../assets/images/cursors/Mafuyu_Diagonal_2.png') 16 16, nesw-resize;
 }
 
-
+/* ─────────────────────────────────────────────
+   10. CROSSHAIR / PRECISION
+   Usage: thêm class "crosshair" vào element
+   ───────────────────────────────────────────── */
 .crosshair {
-  cursor: url('../assets/images/cursors/Mafuyu_Precision.ani'), crosshair;
+  cursor: url('../assets/images/cursors/Mafuyu_Precision.png') 16 16, crosshair;
 }
 
-
+/* ─────────────────────────────────────────────
+   11. CONTEXT MENU
+   Usage: thêm class "context-menu" vào element
+   ───────────────────────────────────────────── */
 .context-menu {
-  cursor: url('../assets/images/cursors/Mafuyu_Alternate.ani'), context-menu;
+  cursor: url('../assets/images/cursors/Mafuyu_Alternate.png') 10 0, context-menu;
 }
 
-
+/* ─────────────────────────────────────────────
+   12. LOCATION / PIN
+   Usage: thêm class "location" vào element
+   ───────────────────────────────────────────── */
 .location {
-  cursor: url('../assets/images/cursors/Mafuyu_Location.ani'), pointer;
+  cursor: url('../assets/images/cursors/Mafuyu_Location.png') 10 24, pointer;
 }
 
-
+/* ─────────────────────────────────────────────
+   13. PERSON / ARTIST / PROFILE
+   Usage: thêm class "person" vào element
+   ───────────────────────────────────────────── */
 .person {
-  cursor: url('../assets/images/cursors/Mafuyu_Person.ani'), pointer;
+  cursor: url('../assets/images/cursors/Mafuyu_Person.png') 10 0, pointer;
 }
 
+/* ─────────────────────────────────────────────
+   14. HANDWRITING / NOTES
+   Usage: thêm class "handwriting" vào element
+   ───────────────────────────────────────────── */
 .handwriting {
-  cursor: url('../assets/images/cursors/Mafuyu_Handwriting.ani'), text;
+  cursor: url('../assets/images/cursors/Mafuyu_Handwriting.png') 10 0, text;
 }

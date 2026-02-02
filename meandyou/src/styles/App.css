@@ -1,3 +1,17 @@
+.cursor-sprite {
+  position: absolute;
+  width: 32px;   /* kích thước frame */
+  height: 32px;
+  pointer-events: none;
+  z-index: 9999;
+  background: url('../assets/images/cursors/Asahina_Mafuyu.gif') no-repeat;
+  animation: play 1s steps(10) infinite; /* 10 frame */
+}
+
+@keyframes play {
+  from { background-position: 0 0; }
+  to { background-position: -320px 0; } /* 32px * 10 frame */
+}
 .main-content {
   margin-top: 60px;
   margin-left: 80px;
