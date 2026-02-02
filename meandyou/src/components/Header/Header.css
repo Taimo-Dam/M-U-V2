@@ -9,6 +9,13 @@
     --text-secondary: #aaaaaa;
     --font-family: 'Poppins', sans-serif;
 }
+@media (max-width: 1024px) {
+  .header {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+  }
+}
+
 
 /* Search Bar */
 .search-container {
