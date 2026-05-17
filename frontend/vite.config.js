@@ -7,4 +7,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:4000',
+      '/images': 'http://localhost:4000',
+      '/audio': 'http://localhost:4000'
+    }
+  }
 })

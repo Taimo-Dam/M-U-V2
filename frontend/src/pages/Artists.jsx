@@ -1,28 +1,52 @@
 import { useState, useEffect } from 'react';
 import ArtistCard from '../components/cards/ArtistCard';
+import { fetchArtists } from '../services/musicService';
 import '../styles/Artists.css';
 
 export default function Artists() {
     const [artists, setArtists] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const mockArtists = [
-            { id: 1, name: 'Sơn Tùng MTP', image: '/images/sontungmtp/sontung-avatar.jfif', songs: 45 },
-            { id: 2, name: 'Amee', image: '/images/Amee/', songs: 38 },
-            { id: 3, name: 'Anh Trai Say Hi', image: '/images/AnhTraiSayHi/', songs: 52 },
-            { id: 4, name: 'Soobin', image: '/images/SooBin/', songs: 41 },
-        ];
-        setArtists(mockArtists);
+        let isMounted = true;
+
+        async function loadArtists() {
+            try {
+                const artistsData = await fetchArtists();
+                if (isMounted) {
+                    setArtists(artistsData);
+                }
+            } catch (fetchError) {
+                if (isMounted) {
+                    setError('Failed to load artists.');
+                }
+            } finally {
+                if (isMounted) {
+                    setLoading(false);
+                }
+            }
+        }
+
+        loadArtists();
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     return (
         <div className="artists-page">
             <h1>Artists</h1>
-            <div className="artists-grid">
-                {artists.map(artist => (
-                    <ArtistCard key={artist.id} artist={artist} />
-                ))}
-            </div>
+            {loading && <p>Loading artists...</p>}
+            {error && <p className="error-message">{error}</p>}
+            {!loading && !error && (
+                <div className="artists-grid">
+                    {artists.map(artist => (
+                        <ArtistCard key={artist._id ?? artist.id} artist={artist} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

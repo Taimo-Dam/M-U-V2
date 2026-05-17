@@ -4,7 +4,7 @@ export default function ArtistCard({ artist }) {
     return (
         <div className="artist-card">
             <div className="artist-image">
-                <img src={artist.image || '/images/default-avatar.jpg'} alt={artist.name} />
+                <img src={artist.image || '/images/default-avatar.svg'} alt={artist.name} />
                 <div className="artist-overlay">
                     <button className="follow-btn">Follow</button>
                 </div>

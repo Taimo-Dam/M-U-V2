@@ -4,7 +4,7 @@ export default function SongCard({ song, onPlay }) {
     return (
         <div className="song-card">
             <div className="song-image">
-                <img src={song.image || '/images/default-song.jpg'} alt={song.title} />
+                <img src={song.image || '/images/default-song.svg'} alt={song.title} />
                 <button className="play-btn" onClick={() => onPlay(song)}>
                     <i className="bx bxs-play-circle"></i>
                 </button>

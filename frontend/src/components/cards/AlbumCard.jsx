@@ -4,7 +4,7 @@ export default function AlbumCard({ album }) {
     return (
         <div className="album-card">
             <div className="album-image">
-                <img src={album.image || '/images/default-album.jpg'} alt={album.title} />
+                <img src={album.image || '/images/default-album.svg'} alt={album.title} />
                 <div className="album-overlay">
                     <button className="play-btn">
                         <i className="bx bxs-play-circle"></i>

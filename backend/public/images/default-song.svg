@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Default song artwork">
+  <rect width="120" height="120" rx="20" fill="#1f2937" />
+  <rect x="20" y="20" width="80" height="80" rx="16" fill="#111827" />
+  <path d="M44 35v50l22-14V35" fill="#8b5cf6" />
+  <circle cx="36" cy="80" r="6" fill="#a78bfa" />
+  <circle cx="72" cy="63" r="6" fill="#a78bfa" />
+</svg>

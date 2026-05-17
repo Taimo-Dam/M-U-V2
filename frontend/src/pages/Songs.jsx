@@ -1,21 +1,41 @@
 import { useState, useEffect } from 'react';
 import SongList from '../components/common/SongList';
+import { fetchSongs } from '../services/musicService';
 import '../styles/Songs.css';
 
 export default function Songs() {
     const [songs, setSongs] = useState([]);
     const [filteredSongs, setFilteredSongs] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Mock data
-        const mockSongs = [
-            { id: 1, title: 'Anh Trai Say Hi', artist: 'Anh Trai Say Hi', duration: '3:45', plays: 1250 },
-            { id: 2, title: 'Nơi Này Có Anh', artist: 'Sơn Tùng MTP', duration: '4:12', plays: 2500 },
-            { id: 3, title: 'Em Của Ngày Hôm Qua', artist: 'Sơn Tùng MTP', duration: '3:58', plays: 3100 },
-        ];
-        setSongs(mockSongs);
-        setFilteredSongs(mockSongs);
+        let isMounted = true;
+
+        async function loadSongs() {
+            try {
+                const songsData = await fetchSongs();
+                if (isMounted) {
+                    setSongs(songsData);
+                    setFilteredSongs(songsData);
+                }
+            } catch (fetchError) {
+                if (isMounted) {
+                    setError('Failed to load songs.');
+                }
+            } finally {
+                if (isMounted) {
+                    setLoading(false);
+                }
+            }
+        }
+
+        loadSongs();
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     useEffect(() => {
@@ -38,7 +58,10 @@ export default function Songs() {
                     className="search-input"
                 />
             </div>
-            <SongList songs={filteredSongs} />
+
+            {loading && <p>Loading songs...</p>}
+            {error && <p className="error-message">{error}</p>}
+            {!loading && !error && <SongList songs={filteredSongs} />}
         </div>
     );
 }
