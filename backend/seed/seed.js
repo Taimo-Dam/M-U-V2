@@ -6,7 +6,7 @@ import Album from '../models/Album.js';
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/meandyou';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/meandyou';
 
 const songs = [
   { title: 'Anh Trai Say Hi', artist: 'Anh Trai Say Hi', duration: '3:45', plays: 1250, image: '/images/anh2.avif' },
