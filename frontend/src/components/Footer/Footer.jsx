@@ -10,7 +10,7 @@ export default function Footer() {
                     <h3>About</h3>
                     <p>Me and You is a website that has been created for over <span className="highlight">1 month</span> now and it is one of the most famous music player websites in the world. On this website, you can listen and download songs for free. Also, if you want no limitations, you can buy our <a href="#" className="premium-link">premium pass</a>.</p>
                 </div>
-                
+
                 <div className="footer-section meandyou">
                     <h3>Melodies</h3>
                     <ul>
@@ -19,7 +19,7 @@ export default function Footer() {
                         <li><a href="#" className="footer-link">Podcast</a></li>
                     </ul>
                 </div>
-                
+
                 <div className="footer-section access">
                     <h3>Access</h3>
                     <ul>
@@ -30,7 +30,7 @@ export default function Footer() {
                         <li><a href="#" className="footer-link">Trending</a></li>
                     </ul>
                 </div>
-                
+
                 <div className="footer-section contact">
                     <h3>Contact</h3>
                     <ul>
@@ -41,7 +41,7 @@ export default function Footer() {
                     </ul>
                 </div>
             </div>
-            
+
             <div className="footer-bottom">
                 <h2 className="gradient-text">Me and You</h2>
                 <p>© {currentYear} M&U - All rights reserved</p>

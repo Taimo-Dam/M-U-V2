@@ -31,7 +31,7 @@ export default function Header() {
         <header className="header">
             <div className="header-left">
                 <a href="/" className="logo">M&U</a>
-                
+
                 <div className="search-container">
                     <form onSubmit={handleSearch} className="search-form">
                         <input
