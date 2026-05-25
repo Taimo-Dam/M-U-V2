@@ -9,9 +9,9 @@ dotenv.config();
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/meandyou';
 
 const songs = [
-  { title: 'Anh Trai Say Hi', artist: 'Anh Trai Say Hi', duration: '3:45', plays: 1250, image: '/images/anh2.avif' },
-  { title: 'Nơi Này Có Anh', artist: 'Sơn Tùng MTP', duration: '4:12', plays: 2500, image: '/images/anh3.avif' },
-  { title: 'Em Của Ngày Hôm Qua', artist: 'Sơn Tùng MTP', duration: '3:58', plays: 3100, image: '/images/anh5.avif' }
+  { title: 'Anh Trai Say Hi', artist: 'Anh Trai Say Hi', duration: '3:45', plays: 1250, image: '/images/anh2.avif', audioUrl: '/audio/nhacTre/CanTinhNhuThe-DICKSONVietNamThanhDatLeChiTrung-10977857.mp3' },
+  { title: 'Nơi Này Có Anh', artist: 'Sơn Tùng MTP', duration: '4:12', plays: 2500, image: '/images/anh3.avif', audioUrl: '/audio/nhacTre/NheNhang-TuanHung-16808620.mp3' },
+  { title: 'Em Của Ngày Hôm Qua', artist: 'Sơn Tùng MTP', duration: '3:58', plays: 3100, image: '/images/anh5.avif', audioUrl: '/audio/nhacTre/ThienLyOi-JackJ97-13829746.mp3' }
 ];
 
 const artists = [

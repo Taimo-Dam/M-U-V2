@@ -28,3 +28,26 @@ export async function getAlbums(req, res, next) {
     next(error);
   }
 }
+
+export async function getArtistByName(req, res, next) {
+  try {
+    const artist = await Artist.findOne({ name: req.params.name });
+    if (artist) {
+      res.json(artist);
+    } else {
+      res.status(404).json({ message: 'Artist not found' });
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getSongsByArtist(req, res, next) {
+  try {
+    const artistName = req.params.name;
+    const songs = await Song.find({ artist: artistName }).sort({ title: 1 });
+    res.json(songs);
+  } catch (error) {
+    next(error);
+  }
+}

@@ -21,3 +21,13 @@ export async function fetchAlbums() {
   const response = await api.get('/albums');
   return response.data;
 }
+
+export async function fetchArtistByName(name) {
+  const response = await api.get(`/artists/${encodeURIComponent(name)}`);
+  return response.data;
+}
+
+export async function fetchSongsByArtist(name) {
+  const response = await api.get(`/artists/${encodeURIComponent(name)}/songs`);
+  return response.data;
+}

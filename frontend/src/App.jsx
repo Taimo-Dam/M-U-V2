@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Songs from './pages/Songs';
 import Albums from './pages/Albums';
 import Artists from './pages/Artists';
+import ArtistDetail from './pages/ArtistDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { AuthProvider } from './context/AuthContext';
@@ -32,6 +33,7 @@ function App (){
             <Route path="/songs" element={<Songs />} />
             <Route path="/albums" element={<Albums />} />
             <Route path="/artists" element={<Artists />} />
+            <Route path="/artist/:name" element={<ArtistDetail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>

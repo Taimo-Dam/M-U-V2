@@ -37,11 +37,11 @@ export default function Artists() {
 
     return (
         <div className="artists-page">
-            <h1>Artists</h1>
+            <h2>Danh sách nghệ sĩ</h2>
             {loading && <p>Loading artists...</p>}
             {error && <p className="error-message">{error}</p>}
             {!loading && !error && (
-                <div className="artists-grid">
+                <div className="artist" id="artist-list">
                     {artists.map(artist => (
                         <ArtistCard key={artist._id ?? artist.id} artist={artist} />
                     ))}

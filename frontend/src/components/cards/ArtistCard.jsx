@@ -1,18 +1,17 @@
-import './ArtistCard.css';
+import { Link } from 'react-router-dom';
+// import './ArtistCard.css'; // Removed as the CSS is now in Artists.css
 
 export default function ArtistCard({ artist }) {
     return (
-        <div className="artist-card">
-            <div className="artist-image">
-                <img src={artist.image || '/images/default-avatar.svg'} alt={artist.name} />
-                <div className="artist-overlay">
-                    <button className="follow-btn">Follow</button>
-                </div>
-            </div>
-            <div className="artist-info">
-                <h3>{artist.name}</h3>
-                <span className="song-count">{artist.songs} songs</span>
-            </div>
-        </div>
+        <Link to={`/artist/${encodeURIComponent(artist.name)}`} className="card">
+            <img 
+                src={artist.image || '/assets/images/default-artist.jpg'} 
+                alt={artist.name} 
+                onError={(e) => {
+                    e.target.src = '/assets/images/default-artist.jpg';
+                }}
+            />
+            <p>{artist.name}</p>
+        </Link>
     );
 }
