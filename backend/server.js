@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import apiRouter from './routes/api.js';
+import authRouter from './routes/authRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Me and You Backend', message: 'Express and MongoDB backend is running.' });
 });
 app.use('/api', apiRouter);
+app.use('/api/auth', authRouter);
 app.use(errorHandler);
 
 mongoose

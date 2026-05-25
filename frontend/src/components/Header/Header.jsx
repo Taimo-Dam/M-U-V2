@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export default function Header() {
     const [searchQuery, setSearchQuery] = useState('');
     const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const { user, logout } = useContext(AuthContext);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -56,8 +59,23 @@ export default function Header() {
                     <a href="/about">About Us</a>
                     <a href="/contact">Contact</a>
                     <a href="/premium">Premium</a>
-                    <a href="/login">Login</a>
-                    <a href="/register"><button className="button">Sign up</button></a>
+                    {user ? (
+                        <>
+                            <div className="user-profile" onClick={handleProfileClick} style={{ position: 'relative', display: 'inline-block', cursor: 'pointer', marginLeft: '15px' }}>
+                                <span style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>{user.username}</span>
+                                {showProfileMenu && (
+                                    <div className="profile-dropdown" style={{ position: 'absolute', top: '100%', right: '0', background: 'var(--panel-bg)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', minWidth: '120px', zIndex: 100 }}>
+                                        <button onClick={logout} style={{ background: 'transparent', border: 'none', color: 'var(--text-color)', cursor: 'pointer', width: '100%', textAlign: 'left', padding: '5px' }}>Logout</button>
+                                    </div>
+                                )}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login">Login</Link>
+                            <Link to="/register"><button className="button">Sign up</button></Link>
+                        </>
+                    )}
                 </nav>
             </div>
         </header>

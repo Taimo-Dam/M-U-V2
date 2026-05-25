@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Songs from './pages/Songs';
 import Albums from './pages/Albums';
 import Artists from './pages/Artists';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { AuthProvider } from './context/AuthContext';
 import { useGlobalCursors } from "./styles/cursors.jsx";
 import './styles/App.css';
 
@@ -17,8 +20,9 @@ function App (){
  
 
   return (
-    <Router>
-      <div className="app-container">
+    <AuthProvider>
+      <Router>
+        <div className="app-container">
         <Header />
         <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
         
@@ -28,12 +32,15 @@ function App (){
             <Route path="/songs" element={<Songs />} />
             <Route path="/albums" element={<Albums />} />
             <Route path="/artists" element={<Artists />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </main>
         
         <Footer />
       </div>
     </Router>
+    </AuthProvider>
   );
 }
 
