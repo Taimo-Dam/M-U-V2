@@ -1,0 +1,48 @@
+.not-found-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    text-align: center;
+    color: var(--text-color, #fff);
+}
+
+.not-found-page h1 {
+    font-size: 8rem;
+    margin: 0;
+    background: linear-gradient(135deg, #ff69b4, #1e90ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+}
+
+.not-found-page h2 {
+    font-size: 2rem;
+    margin: 10px 0 20px;
+}
+
+.not-found-page p {
+    font-size: 1.2rem;
+    color: var(--text-secondary, #ccc);
+    margin-bottom: 30px;
+}
+
+.back-home-btn {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #ff69b4, #1e90ff);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-home-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(30, 144, 255, 0.4);
+}

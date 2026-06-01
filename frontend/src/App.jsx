@@ -10,6 +10,8 @@ import Artists from './pages/Artists';
 import ArtistDetail from './pages/ArtistDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Logout from './pages/Logout';
+import NotFound from './pages/NotFound';
 import { AuthProvider } from './context/AuthContext';
 import { useGlobalCursors } from "./styles/cursors.jsx";
 import './styles/App.css';
@@ -36,6 +38,8 @@ function App (){
             <Route path="/artist/:name" element={<ArtistDetail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         

@@ -61,14 +61,8 @@ export default function Header() {
                     <a href="/premium">Premium</a>
                     {user ? (
                         <>
-                            <div className="user-profile" onClick={handleProfileClick} style={{ position: 'relative', display: 'inline-block', cursor: 'pointer', marginLeft: '15px' }}>
-                                <span style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>{user.username}</span>
-                                {showProfileMenu && (
-                                    <div className="profile-dropdown" style={{ position: 'absolute', top: '100%', right: '0', background: 'var(--panel-bg)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', minWidth: '120px', zIndex: 100 }}>
-                                        <button onClick={logout} style={{ background: 'transparent', border: 'none', color: 'var(--text-color)', cursor: 'pointer', width: '100%', textAlign: 'left', padding: '5px' }}>Logout</button>
-                                    </div>
-                                )}
-                            </div>
+                            <span style={{ color: 'var(--primary-color)', fontWeight: 'bold', marginLeft: '15px', marginRight: '15px' }}>Hi, {user.username}</span>
+                            <Link to="/logout">Logout</Link>
                         </>
                     ) : (
                         <>
