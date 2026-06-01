@@ -1,6 +1,9 @@
+import { useContext } from 'react';
+import { PlayerContext } from '../../context/PlayerContext';
 import './SongList.css';
 
 export default function SongList({ songs }) {
+    const { currentSong, isPlaying, playSong } = useContext(PlayerContext);
     return (
         <div className="song-list">
             <table>
@@ -23,8 +26,8 @@ export default function SongList({ songs }) {
                             <td>{song.duration}</td>
                             <td>{song.plays}</td>
                             <td>
-                                <button className="play-btn">
-                                    <i className="bx bxs-play"></i>
+                                <button className="play-btn" onClick={() => playSong(song, songs)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '1.5em', color: 'var(--primary-color)' }}>
+                                    <i className={currentSong?._id === song._id && isPlaying ? 'bx bx-pause-circle' : 'bx bx-play-circle'}></i>
                                 </button>
                             </td>
                         </tr>

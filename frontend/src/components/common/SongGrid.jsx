@@ -1,11 +1,11 @@
 import SongCard from '../cards/SongCard';
 import './SongGrid.css';
 
-export default function SongGrid({ songs, onPlay }) {
+export default function SongGrid({ songs }) {
     return (
         <div className="song-grid">
             {songs.map(song => (
-                <SongCard key={song.id} song={song} onPlay={onPlay} />
+                <SongCard key={song._id || song.id} song={song} playlist={songs} />
             ))}
         </div>
     );

@@ -31,3 +31,16 @@ export async function fetchSongsByArtist(name) {
   const response = await api.get(`/artists/${encodeURIComponent(name)}/songs`);
   return response.data;
 }
+
+export async function recordPlay(songId, token) {
+  const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+  const response = await api.post(`/songs/${songId}/play`, {}, config);
+  return response.data;
+}
+
+export async function getHistory(token) {
+  if (!token) return [];
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const response = await api.get('/auth/history', config);
+  return response.data;
+}

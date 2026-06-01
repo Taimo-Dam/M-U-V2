@@ -33,7 +33,7 @@ export default function Header() {
     return (
         <header className="header">
             <div className="header-left">
-                <a href="/" className="logo">M&U</a>
+                <Link to="/" className="logo">M&U</Link>
 
                 <div className="search-container">
                     <form onSubmit={handleSearch} className="search-form">
@@ -56,9 +56,9 @@ export default function Header() {
 
             <div className="header-right">
                 <nav>
-                    <a href="/about">About Us</a>
-                    <a href="/contact">Contact</a>
-                    <a href="/premium">Premium</a>
+                    <Link to="/about">About Us</Link>
+                    <Link to="/contact">Contact</Link>
+                    <Link to="/premium">Premium</Link>
                     {user ? (
                         <>
                             <span style={{ color: 'var(--primary-color)', fontWeight: 'bold', marginLeft: '15px', marginRight: '15px' }}>Hi, {user.username}</span>

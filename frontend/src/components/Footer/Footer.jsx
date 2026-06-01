@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 export default function Footer() {
@@ -14,20 +15,20 @@ export default function Footer() {
                 <div className="footer-section meandyou">
                     <h3>Melodies</h3>
                     <ul>
-                        <li><a href="/songs" className="footer-link">Songs</a></li>
-                        <li><a href="#" className="footer-link">Radio</a></li>
-                        <li><a href="#" className="footer-link">Podcast</a></li>
+                        <li><Link to="/songs" className="footer-link">Songs</Link></li>
+                        <li><Link to="#" className="footer-link">Radio</Link></li>
+                        <li><Link to="#" className="footer-link">Podcast</Link></li>
                     </ul>
                 </div>
-
+                
                 <div className="footer-section access">
                     <h3>Access</h3>
                     <ul>
-                        <li><a href="#" className="footer-link">Explore</a></li>
-                        <li><a href="#" className="footer-link">Artists</a></li>
-                        <li><a href="#" className="footer-link">Playlists</a></li>
-                        <li><a href="#" className="footer-link">Albums</a></li>
-                        <li><a href="#" className="footer-link">Trending</a></li>
+                        <li><Link to="#" className="footer-link">Explore</Link></li>
+                        <li><Link to="/artists" className="footer-link">Artists</Link></li>
+                        <li><Link to="#" className="footer-link">Playlists</Link></li>
+                        <li><Link to="/albums" className="footer-link">Albums</Link></li>
+                        <li><Link to="#" className="footer-link">Trending</Link></li>
                     </ul>
                 </div>
 

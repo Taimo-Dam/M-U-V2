@@ -12,7 +12,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
 import NotFound from './pages/NotFound';
+import History from './pages/History';
 import { AuthProvider } from './context/AuthContext';
+import { PlayerProvider } from './context/PlayerContext';
+import Playbar from './components/Playbar/Playbar';
 import { useGlobalCursors } from "./styles/cursors.jsx";
 import './styles/App.css';
 
@@ -24,8 +27,9 @@ function App (){
 
   return (
     <AuthProvider>
-      <Router>
-        <div className="app-container">
+      <PlayerProvider>
+        <Router>
+          <div className="app-container">
         <Header />
         <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
         
@@ -38,14 +42,18 @@ function App (){
             <Route path="/artist/:name" element={<ArtistDetail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/artists/:name" element={<ArtistDetail />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/history" element={<History />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+          <Playbar />
+        </div>
+      </Router>
+      </PlayerProvider>
     </AuthProvider>
   );
 }

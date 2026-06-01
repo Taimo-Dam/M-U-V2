@@ -20,7 +20,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
-    }
+    },
+    listeningHistory: [{
+        song: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Song'
+        },
+        playedAt: {
+            type: Date,
+            default: Date.now
+        }
+    }]
 }, {
     timestamps: true
 });

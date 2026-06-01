@@ -65,3 +65,22 @@ export const logoutUser = (req, res) => {
     // Since we're using localStorage on frontend, just send success response.
     res.json({ message: 'User logged out successfully' });
 };
+
+export const getUserHistory = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate('listeningHistory.song');
+        
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        // Return just the songs formatted correctly
+        const historySongs = user.listeningHistory
+            .filter(item => item.song) // Filter out any null songs (if deleted)
+            .map(item => item.song);
+            
+        res.json(historySongs);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchArtistByName, fetchSongsByArtist } from '../services/musicService';
+import { PlayerContext } from '../context/PlayerContext';
+import { useContext } from 'react';
 import './ArtistDetail.css';
 
 export default function ArtistDetail() {
     const { name } = useParams();
+    const { currentSong, isPlaying, playSong, togglePlayPause } = useContext(PlayerContext);
+    
     const [artist, setArtist] = useState(null);
     const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -55,7 +58,8 @@ export default function ArtistDetail() {
                     onError={(e) => { e.target.src = '/assets/images/default-artist.jpg'; }} />
                 <div className="artist-info">
                     <h1>{artist.name}</h1>
-                    <p>{songs.length} {songs.length === 1 ? 'Song' : 'Songs'}</p>
+                    <p style={{ marginBottom: '15px' }}>{songs.length} {songs.length === 1 ? 'Song' : 'Songs'}</p>
+                    <button className="button" style={{ padding: '8px 24px', borderRadius: '20px' }}>Follow</button>
                 </div>
             </div>
 
@@ -73,9 +77,13 @@ export default function ArtistDetail() {
                             </div>
                             <div className="song-audio">
                                 {song.audioUrl ? (
-                                    <audio controls src={getFullUrl(song.audioUrl)}>
-                                        Your browser does not support the audio element.
-                                    </audio>
+                                    <button 
+                                        className="play-button" 
+                                        onClick={() => playSong(song, songs)}
+                                        style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
+                                    >
+                                        <i className={currentSong?._id === song._id && isPlaying ? 'bx bx-pause-circle' : 'bx bx-play-circle'}></i>
+                                    </button>
                                 ) : (
                                     <span style={{ fontSize: '12px', color: '#ff5555', marginLeft: '20px' }}>Audio unavailable</span>
                                 )}

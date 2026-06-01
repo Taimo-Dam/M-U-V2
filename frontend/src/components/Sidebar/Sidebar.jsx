@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -11,60 +12,60 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
             <div className={`sidebar ${isOpen ? 'open' : ''}`}>
                 <nav className="sidebar-nav">
-                    <a href="/" className="nav-link">
+                    <Link to="/" className="nav-link">
                         <i className="bx bxs-home"></i>
                         <span>Home</span>
-                    </a>
+                    </Link>
                     <a href="#discover" className="nav-link">
                         <i className="bx bx-music"></i>
                         <span>Discover</span>
                     </a>
-                    <a href="/albums" className="nav-link" data-title="Albums">
+                    <Link to="/albums" className="nav-link" data-title="Albums">
                         <i className="fas fa-compact-disc"></i>
                         <span>Albums</span>
-                    </a>
-                    <a href="/artists" className="nav-link" data-title="Artists">
+                    </Link>
+                    <Link to="/artists" className="nav-link" data-title="Artists">
                         <i className="fas fa-microphone"></i>
                         <span>Artists</span>
-                    </a>
+                    </Link>
 
                     <div className="sidebar-content">
                         <ul className="nav-list">
                             <li className="nav-category">Library</li>
                             <li className="nav-item">
-                                <a href="/recent" className="nav-link" data-title="Recently Added">
+                                <Link to="/history" className="nav-link" data-title="Listening History">
                                     <i className="fas fa-history"></i>
-                                    <span>Recently Added</span>
-                                </a>
+                                    <span>Listening History</span>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a href="/most-played" className="nav-link" data-title="Most Played">
+                                <Link to="/most-played" className="nav-link" data-title="Most Played">
                                     <i className="fas fa-fire"></i>
                                     <span>Most Played</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="nav-category">Playlist and Favorite</li>
                             <li className="nav-item">
-                                <a href="/favorites" className="nav-link" data-title="Your Favorites">
+                                <Link to="/favorites" className="nav-link" data-title="Your Favorites">
                                     <i className="fas fa-heart"></i>
                                     <span>Your Favorites</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="nav-item">
-                                <a href="/create-playlist" className="nav-link blue" data-title="Add Playlist">
+                                <Link to="/create-playlist" className="nav-link blue" data-title="Add Playlist">
                                     <i className="fas fa-plus"></i>
                                     <span>Add Playlist</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="nav-category">General</li>
                             <li className="nav-item">
-                                <a href="/settings" className="nav-link" data-title="Settings">
+                                <Link to="/settings" className="nav-link" data-title="Settings">
                                     <i className="fas fa-cog"></i>
                                     <span>Settings</span>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

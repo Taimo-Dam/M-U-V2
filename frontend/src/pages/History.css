@@ -1,0 +1,10 @@
+.history-page {
+    padding: 20px;
+    color: var(--text-color, #fff);
+}
+
+.history-page h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: var(--primary-color, #ff69b4);
+}
