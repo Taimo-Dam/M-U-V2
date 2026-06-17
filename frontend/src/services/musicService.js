@@ -44,3 +44,8 @@ export async function getHistory(token) {
   const response = await api.get('/auth/history', config);
   return response.data;
 }
+
+export async function searchMusic(query) {
+  const response = await api.get(`/search?q=${encodeURIComponent(query)}`);
+  return response.data;
+}

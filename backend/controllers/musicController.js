@@ -112,3 +112,39 @@ export async function recordPlay(req, res, next) {
     next(error);
   }
 }
+
+export async function search(req, res, next) {
+  try {
+    const q = req.query.q || '';
+    if (!q) {
+      return res.json({ songs: [], artists: [] });
+    }
+    const queryNormalized = normalizeName(q);
+    
+    const [allSongs, allArtists] = await Promise.all([
+      Song.find(),
+      Artist.find()
+    ]);
+    
+    const matchedArtists = allArtists.filter(artist => {
+      const nameNorm = normalizeName(artist.name);
+      return nameNorm.includes(queryNormalized) || queryNormalized.includes(nameNorm);
+    }).slice(0, 5);
+    
+    const matchedSongs = allSongs.filter(song => {
+      const titleNorm = normalizeName(song.title);
+      const artistNorm = normalizeName(song.artist);
+      return titleNorm.includes(queryNormalized) || 
+             artistNorm.includes(queryNormalized) ||
+             queryNormalized.includes(titleNorm) ||
+             queryNormalized.includes(artistNorm);
+    }).slice(0, 5);
+    
+    res.json({
+      songs: matchedSongs,
+      artists: matchedArtists
+    });
+  } catch (error) {
+    next(error);
+  }
+}
