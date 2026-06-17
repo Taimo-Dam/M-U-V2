@@ -11,6 +11,9 @@ import ArtistDetail from './pages/ArtistDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Premium from './pages/Premium';
 import NotFound from './pages/NotFound';
 import History from './pages/History';
 import { AuthProvider } from './context/AuthContext';
@@ -40,6 +43,9 @@ function App (){
             <Route path="/albums" element={<Albums />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/artist/:name" element={<ArtistDetail />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/premium" element={<Premium />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/artists/:name" element={<ArtistDetail />} />

@@ -1,0 +1,66 @@
+.premium-page {
+  padding: 40px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: #f4f4f4;
+}
+
+.premium-hero {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.premium-hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+}
+
+.premium-hero p {
+  font-size: 1.05rem;
+  color: #c9c9c9;
+}
+
+.premium-benefits,
+.premium-plan {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 28px;
+}
+
+.premium-benefits ul,
+.premium-plan-card ul {
+  list-style: disc;
+  padding-left: 20px;
+  color: #dcdcdc;
+}
+
+.premium-plan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.premium-plan-card h3 {
+  margin: 0;
+}
+
+.premium-plan-card .price {
+  color: #a5d8ff;
+}
+
+.premium-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.premium-cta:hover {
+  opacity: 0.95;
+}
