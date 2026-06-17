@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { fetchArtistByName, fetchSongsByArtist } from '../services/musicService';
 import { PlayerContext } from '../context/PlayerContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import './ArtistDetail.css';
 
 export default function ArtistDetail() {

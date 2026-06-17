@@ -17,7 +17,8 @@ export default function Home() {
             try {
                 const [songsData, artistsData] = await Promise.all([fetchSongs(), fetchArtists()]);
                 if (isMounted) {
-                    setSongs(songsData);
+                    const randomSongs = [...songsData].sort(() => 0.5 - Math.random()).slice(0, 10);
+                    setSongs(randomSongs);
                     setArtists(artistsData);
                 }
             } catch (fetchError) {

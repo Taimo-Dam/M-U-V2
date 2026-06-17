@@ -30,11 +30,29 @@ export async function getAlbums(req, res, next) {
   }
 }
 
+function normalizeName(str) {
+  if (!str) return '';
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // remove accents
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'd')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, ''); // remove non-alphanumeric characters
+}
+
 export async function getArtistByName(req, res, next) {
   try {
-    const artist = await Artist.findOne({ name: req.params.name });
-    if (artist) {
-      res.json(artist);
+    const queryNormalized = normalizeName(req.params.name);
+    const artists = await Artist.find();
+    
+    const matchedArtist = artists.find(artist => {
+      const artistNormalized = normalizeName(artist.name);
+      return artistNormalized.includes(queryNormalized) || queryNormalized.includes(artistNormalized);
+    });
+
+    if (matchedArtist) {
+      res.json(matchedArtist);
     } else {
       res.status(404).json({ message: 'Artist not found' });
     }
@@ -45,7 +63,15 @@ export async function getArtistByName(req, res, next) {
 
 export async function getSongsByArtist(req, res, next) {
   try {
-    const artistName = req.params.name;
+    const queryNormalized = normalizeName(req.params.name);
+    const artists = await Artist.find();
+    
+    const matchedArtist = artists.find(artist => {
+      const artistNormalized = normalizeName(artist.name);
+      return artistNormalized.includes(queryNormalized) || queryNormalized.includes(artistNormalized);
+    });
+
+    const artistName = matchedArtist ? matchedArtist.name : req.params.name;
     const songs = await Song.find({ artist: artistName }).sort({ title: 1 });
     res.json(songs);
   } catch (error) {
