@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { PlayerContext } from '../../context/PlayerContext';
+import { getAssetUrl } from '../../services/musicService';
 import './SongCard.css';
 
 export default function SongCard({ song, playlist }) {
@@ -7,7 +8,7 @@ export default function SongCard({ song, playlist }) {
     return (
         <div className="song-card">
             <div className="song-image">
-                <img src={song.image || '/images/default-song.svg'} alt={song.title} />
+                <img src={getAssetUrl(song.image) || '/images/default-song.svg'} alt={song.title} />
                 <button className="play-btn" onClick={() => playSong(song, playlist)}>
                     <i className={currentSong?._id === song._id && isPlaying ? 'bx bx-pause-circle' : 'bx bxs-play-circle'}></i>
                 </button>

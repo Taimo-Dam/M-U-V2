@@ -3,6 +3,21 @@ import axios from 'axios';
 const rawUrl = import.meta.env.VITE_API_URL || '/api';
 const baseURL = rawUrl.startsWith('http') && !rawUrl.endsWith('/api') ? `${rawUrl}/api` : rawUrl;
 
+// Tách lấy domain backend (bỏ phần /api ở cuối)
+// Dùng để ghép đúng URL cho file ảnh và audio từ Backend
+export const BACKEND_ORIGIN = baseURL.replace(/\/api\/?$/, '');
+
+/**
+ * Chuyển đường dẫn tương đối (/images/... hoặc /audio/...)
+ * thành URL tuyệt đối trỏ về Backend (Render).
+ * Nếu đã là URL đầy đủ (http...) thì giữ nguyên.
+ */
+export function getAssetUrl(path) {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  return `${BACKEND_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
 const api = axios.create({
   baseURL,
   headers: {

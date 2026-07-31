@@ -53,15 +53,15 @@ app.use('/api', apiRouter);
 app.use('/api/auth', authRouter);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Backend listening on port ${PORT}`);
-});
-
 mongoose
   .connect(MONGO_URI, { autoIndex: true })
   .then(() => {
     console.log('Connected to MongoDB');
+    app.listen(PORT, () => {
+      console.log(`Backend listening on http://localhost:${PORT}`);
+    });
   })
   .catch((error) => {
     console.error('MongoDB connection failed:', error);
+    process.exit(1);
   });
