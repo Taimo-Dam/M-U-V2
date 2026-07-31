@@ -27,9 +27,11 @@ export const PlayerProvider = ({ children }) => {
     const playSongRef = useRef();
 
     const playSong = (song, playlist = null) => {
+        const rawApiUrl = import.meta.env.VITE_API_URL || '';
+        const backendOrigin = rawApiUrl.replace(/\/api\/?$/, '');
         const audioUrl = song.audioUrl && song.audioUrl.startsWith('http') 
             ? song.audioUrl 
-            : (song.audioUrl.startsWith('/') ? song.audioUrl : `/${song.audioUrl}`);
+            : `${backendOrigin}${song.audioUrl.startsWith('/') ? song.audioUrl : `/${song.audioUrl}`}`;
 
         if (!song.audioUrl) {
             console.error('No audio URL for this song');
