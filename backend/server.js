@@ -22,7 +22,24 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'));
-app.use(cors({ origin: CORS_ORIGINS }));
+// Cho phép tất cả các domain (Origin) truy cập API và file âm nhạc
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Đảm bảo các thư mục static (audio/images) luôn gửi Header CORS cho trình duyệt
+const staticOptions = {
+  setHeaders: (res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+  }
+};
+
+app.use('/public', express.static(path.join(__dirname, 'public'), staticOptions));
+app.use('/images', express.static(path.join(__dirname, 'public', 'images'), staticOptions));
+app.use('/audio', express.static(path.join(__dirname, 'public', 'audio'), staticOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
