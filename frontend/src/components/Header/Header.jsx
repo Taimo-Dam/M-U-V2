@@ -99,7 +99,7 @@ export default function Header() {
                                                     }}
                                                 >
                                                     <img
-                                                        src={artist.image || '/assets/images/default-artist.jpg'}
+                                                        src={getAssetUrl(artist.image) || '/assets/images/default-artist.jpg'}
                                                         alt={artist.name}
                                                         onError={(e) => { e.target.src = '/assets/images/default-artist.jpg'; }}
                                                     />
@@ -127,7 +127,7 @@ export default function Header() {
                                                     }}
                                                 >
                                                     <img
-                                                        src={song.image || '/assets/images/default-song.svg'}
+                                                        src={getAssetUrl(song.image) || '/assets/images/default-song.svg'}
                                                         alt={song.title}
                                                         onError={(e) => { e.target.src = '/assets/images/default-song.svg'; }}
                                                     />
