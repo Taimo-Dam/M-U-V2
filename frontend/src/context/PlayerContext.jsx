@@ -12,37 +12,24 @@ export const PlayerProvider = ({ children }) => {
     const [queue, setQueue] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(-1);
     
-    // We can use a ref to hold the actual Audio object so we can control it directly,
-    // or we can rely on a hidden <audio> tag in Playbar.jsx.
-    // Given React patterns, managing the Audio object here is robust.
     const audioRef = useRef(new Audio());
+    const queueRef = useRef(queue);
+    const currentIndexRef = useRef(currentIndex);
 
     useEffect(() => {
-        const audio = audioRef.current;
-        
-        const handleEnded = () => {
-            // Auto play next song if available
-            if (queue.length > 0 && currentIndex < queue.length - 1) {
-                const nextS = queue[currentIndex + 1];
-                playSong(nextS, queue);
-            } else {
-                setIsPlaying(false);
-            }
-        };
+        queueRef.current = queue;
+    }, [queue]);
 
-        audio.addEventListener('ended', handleEnded);
-        
-        return () => {
-            audio.removeEventListener('ended', handleEnded);
-            audio.pause();
-        };
-    }, []);
+    useEffect(() => {
+        currentIndexRef.current = currentIndex;
+    }, [currentIndex]);
+
+    const playSongRef = useRef();
 
     const playSong = (song, playlist = null) => {
-        const backendUrl = 'http://localhost:4000';
         const audioUrl = song.audioUrl && song.audioUrl.startsWith('http') 
             ? song.audioUrl 
-            : `${backendUrl}${song.audioUrl}`;
+            : (song.audioUrl.startsWith('/') ? song.audioUrl : `/${song.audioUrl}`);
 
         if (!song.audioUrl) {
             console.error('No audio URL for this song');
@@ -50,7 +37,6 @@ export const PlayerProvider = ({ children }) => {
         }
 
         if (currentSong && currentSong._id === song._id) {
-            // Toggle play/pause if it's the same song
             togglePlayPause();
             return;
         }
@@ -69,23 +55,28 @@ export const PlayerProvider = ({ children }) => {
         audioRef.current.play()
             .then(() => {
                 setIsPlaying(true);
-                // Fire and forget recording the play
                 recordPlay(song._id, user?.token).catch(e => console.error("Failed to record play:", e));
             })
             .catch(e => console.error("Playback failed:", e));
     };
 
+    playSongRef.current = playSong;
+
     const nextSong = () => {
-        if (queue.length > 0 && currentIndex < queue.length - 1) {
-            const nextS = queue[currentIndex + 1];
-            playSong(nextS, queue);
+        const q = queueRef.current;
+        const idx = currentIndexRef.current;
+        if (q.length > 0 && idx < q.length - 1) {
+            const nextS = q[idx + 1];
+            playSongRef.current(nextS, q);
         }
     };
 
     const prevSong = () => {
-        if (queue.length > 0 && currentIndex > 0) {
-            const prevS = queue[currentIndex - 1];
-            playSong(prevS, queue);
+        const q = queueRef.current;
+        const idx = currentIndexRef.current;
+        if (q.length > 0 && idx > 0) {
+            const prevS = q[idx - 1];
+            playSongRef.current(prevS, q);
         }
     };
 
@@ -101,6 +92,30 @@ export const PlayerProvider = ({ children }) => {
                 .catch(e => console.error("Playback failed:", e));
         }
     };
+
+    useEffect(() => {
+        const audio = audioRef.current;
+        
+        const handleEnded = () => {
+            const q = queueRef.current;
+            const idx = currentIndexRef.current;
+            if (q.length > 0 && idx < q.length - 1) {
+                const nextS = q[idx + 1];
+                if (playSongRef.current) {
+                    playSongRef.current(nextS, q);
+                }
+            } else {
+                setIsPlaying(false);
+            }
+        };
+
+        audio.addEventListener('ended', handleEnded);
+        
+        return () => {
+            audio.removeEventListener('ended', handleEnded);
+            audio.pause();
+        };
+    }, []);
 
     const value = {
         currentSong,
@@ -118,3 +133,4 @@ export const PlayerProvider = ({ children }) => {
         </PlayerContext.Provider>
     );
 };
+
