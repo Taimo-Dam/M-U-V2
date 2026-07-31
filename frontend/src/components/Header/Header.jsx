@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { PlayerContext } from '../../context/PlayerContext';
-import { searchMusic } from '../../services/musicService';
+import { searchMusic, getAssetUrl } from '../../services/musicService';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
@@ -10,7 +10,7 @@ export default function Header() {
     const [searchResults, setSearchResults] = useState({ songs: [], artists: [] });
     const [showSearchResults, setShowSearchResults] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
-    
+
     const { user, logout } = useContext(AuthContext);
     const { playSong } = useContext(PlayerContext);
 
@@ -78,7 +78,7 @@ export default function Header() {
                             <i className="fas fa-search"></i>
                         </button>
                     </form>
-                    
+
                     {showSearchResults && (
                         <div className="search-results show">
                             {searchResults.artists.length === 0 && searchResults.songs.length === 0 ? (
@@ -89,8 +89,8 @@ export default function Header() {
                                         <div className="result-section">
                                             <h3>Artists</h3>
                                             {searchResults.artists.map(artist => (
-                                                <Link 
-                                                    key={artist._id} 
+                                                <Link
+                                                    key={artist._id}
                                                     to={`/artist/${encodeURIComponent(artist.name)}`}
                                                     className="result-item"
                                                     onClick={() => {
@@ -98,8 +98,8 @@ export default function Header() {
                                                         setSearchQuery('');
                                                     }}
                                                 >
-                                                    <img 
-                                                        src={artist.image || '/assets/images/default-artist.jpg'} 
+                                                    <img
+                                                        src={artist.image || '/assets/images/default-artist.jpg'}
                                                         alt={artist.name}
                                                         onError={(e) => { e.target.src = '/assets/images/default-artist.jpg'; }}
                                                     />
@@ -111,13 +111,13 @@ export default function Header() {
                                             ))}
                                         </div>
                                     )}
-                                    
+
                                     {searchResults.songs.length > 0 && (
                                         <div className="result-section">
                                             <h3>Songs</h3>
                                             {searchResults.songs.map(song => (
-                                                <div 
-                                                    key={song._id} 
+                                                <div
+                                                    key={song._id}
                                                     className="result-item"
                                                     style={{ cursor: 'pointer' }}
                                                     onClick={() => {
@@ -126,8 +126,8 @@ export default function Header() {
                                                         setSearchQuery('');
                                                     }}
                                                 >
-                                                    <img 
-                                                        src={song.image || '/assets/images/default-song.svg'} 
+                                                    <img
+                                                        src={song.image || '/assets/images/default-song.svg'}
                                                         alt={song.title}
                                                         onError={(e) => { e.target.src = '/assets/images/default-song.svg'; }}
                                                     />
