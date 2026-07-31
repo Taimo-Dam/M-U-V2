@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Hero from '../components/BackGround/BackGround';
 import SongGrid from '../components/common/SongGrid';
-import { fetchSongs, fetchArtists } from '../services/musicService';
+import { fetchSongs, fetchArtists, getAssetUrl } from '../services/musicService';
 import '../styles/Home.css';
 
 export default function Home() {
@@ -58,7 +58,7 @@ export default function Home() {
                     <div className="artists-grid">
                         {artists.map(artist => (
                             <div key={artist._id ?? artist.id} className="artist-card">
-                                <img src={artist.image} alt={artist.name} />
+                                <img src={getAssetUrl(artist.image)} alt={artist.name} />
                                 <p>{artist.name}</p>
                             </div>
                         ))}
