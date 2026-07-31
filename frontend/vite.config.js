@@ -9,10 +9,9 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/api': { target: 'http://localhost:4000', changeOrigin: true },
-      '/images': { target: 'http://localhost:4000', changeOrigin: true },
-      '/audio': { target: 'http://localhost:4000', changeOrigin: true }
+      '/api': 'http://localhost:4000',
+      '/images': 'http://localhost:4000',
+      '/audio': 'http://localhost:4000'
     }
   }
-  
 })
