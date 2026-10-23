@@ -63,7 +63,7 @@ M-U-V2/
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Taimo-Dam/M-U-V2.git
 cd M-U-V2
 ```
 
@@ -81,8 +81,6 @@ Create a `.env` file based on the example:
 ```bash
 cp .env.example .env
 ```
-
-Edit `.env` with your values:
 
 ```env
 PORT=4000
