@@ -9,10 +9,10 @@ import apiRouter from './routes/api.js';
 import authRouter from './routes/authRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '.env') });
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://admin:9Y3Q_d5J.av6zTw@cluster0.skmhcpp.mongodb.net/meandyou?retryWrites=true&w=majority';
