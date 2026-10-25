@@ -1,20 +1,14 @@
 import axios from 'axios';
 
-const rawUrl = import.meta.env.VITE_API_URL || '/api';
-const baseURL = rawUrl.startsWith('http') && !rawUrl.endsWith('/api') ? `${rawUrl}/api` : rawUrl;
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, '');
+const backendOrigin = configuredApiUrl?.replace(/\/api$/i, '') || '';
+const baseURL = backendOrigin ? `${backendOrigin}/api` : '/api';
 
-// Tách lấy domain backend (bỏ phần /api ở cuối)
-// Dùng để ghép đúng URL cho file ảnh và audio từ Backend
-export const BACKEND_ORIGIN = baseURL.replace(/\/api\/?$/, '');
+export const BACKEND_ORIGIN = backendOrigin;
 
-/**
- * Chuyển đường dẫn tương đối (/images/... hoặc /audio/...)
- * thành URL tuyệt đối trỏ về Backend (Render).
- * Nếu đã là URL đầy đủ (http...) thì giữ nguyên.
- */
 export function getAssetUrl(path) {
   if (!path) return '';
-  if (path.startsWith('http')) return path;
+  if (/^https?:\/\//i.test(path)) return path;
   return `${BACKEND_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
@@ -78,5 +72,15 @@ export async function fetchSmartPlaylist(trackId, token) {
 
 export async function searchMusic(query) {
   const response = await api.get(`/search?q=${encodeURIComponent(query)}`);
+  return response.data;
+}
+
+export async function loginUser(email, password) {
+  const response = await api.post('/auth/login', { email, password });
+  return response.data;
+}
+
+export async function registerUser(username, email, password) {
+  const response = await api.post('/auth/register', { username, email, password });
   return response.data;
 }

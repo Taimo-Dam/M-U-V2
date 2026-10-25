@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { loginUser, registerUser } from '../services/musicService';
 
 export const AuthContext = createContext();
 
@@ -17,12 +17,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
-            const { data } = await axios.post('http://localhost:4000/api/auth/login', { email, password }, config);
+            const data = await loginUser(email, password);
             
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));
@@ -39,12 +34,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (username, email, password) => {
         try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
-            const { data } = await axios.post('http://localhost:4000/api/auth/register', { username, email, password }, config);
+            const data = await registerUser(username, email, password);
             
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));

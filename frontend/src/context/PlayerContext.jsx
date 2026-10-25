@@ -1,6 +1,6 @@
 import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
 import { AuthContext } from './AuthContext';
-import { recordPlay } from '../services/musicService';
+import { getAssetUrl, recordPlay } from '../services/musicService';
 
 export const PlayerContext = createContext();
 
@@ -27,16 +27,12 @@ export const PlayerProvider = ({ children }) => {
     const playSongRef = useRef();
 
     const playSong = (song, playlist = null) => {
-        const rawApiUrl = import.meta.env.VITE_API_URL || '';
-        const backendOrigin = rawApiUrl.replace(/\/api\/?$/, '');
-        const audioUrl = song.audioUrl && song.audioUrl.startsWith('http') 
-            ? song.audioUrl 
-            : `${backendOrigin}${song.audioUrl.startsWith('/') ? song.audioUrl : `/${song.audioUrl}`}`;
-
         if (!song.audioUrl) {
             console.error('No audio URL for this song');
             return;
         }
+
+        const audioUrl = getAssetUrl(song.audioUrl);
 
         if (currentSong && currentSong._id === song._id) {
             togglePlayPause();
@@ -135,4 +131,3 @@ export const PlayerProvider = ({ children }) => {
         </PlayerContext.Provider>
     );
 };
-

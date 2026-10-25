@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { PlayerContext } from '../../context/PlayerContext';
+import { getAssetUrl } from '../../services/musicService';
 import './Playbar.css';
 
 export default function Playbar() {
@@ -48,10 +49,7 @@ export default function Playbar() {
     // Hide if nothing has been played yet
     if (!currentSong) return <div className="playbar-container hidden"></div>;
 
-    const backendUrl = 'http://localhost:4000';
-    const imageUrl = currentSong.image && currentSong.image.startsWith('http') 
-        ? currentSong.image 
-        : `${backendUrl}${currentSong.image || '/assets/images/default-song.svg'}`;
+    const imageUrl = getAssetUrl(currentSong.image || '/assets/images/default-song.svg');
 
     return (
         <div className="playbar-container">
