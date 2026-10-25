@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import neo4j from 'neo4j-driver';
 import ListeningHistory from '../models/ListeningHistory.js';
 import { createNeo4jSession } from '../config/neo4j.js';
 
@@ -121,7 +122,7 @@ export async function getRecommendations(userId, limit = 20) {
   return runGraphQuery(recommendationQuery, {
     userId: graphId(userId),
     minSimilarity: 0.05,
-    limit
+    limit: neo4j.int(limit)
   });
 }
 
@@ -146,7 +147,7 @@ export async function getSmartPlaylist(trackId, userId, limit = 20) {
   return runGraphQuery(playlistQuery, {
     trackId: graphId(trackId),
     userId: graphId(userId),
-    limit
+    limit: neo4j.int(limit)
   });
 }
 
