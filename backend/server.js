@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 4000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/meandyou';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://admin:9Y3Q_d5J.av6zTw@cluster0.skmhcpp.mongodb.net/meandyou?retryWrites=true&w=majority';
 const CORS_ORIGINS = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : ['http://localhost:5173', 'http://localhost:5174'];
 
 app.set('view engine', 'ejs');

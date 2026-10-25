@@ -5,6 +5,8 @@ const songSchema = new mongoose.Schema({
   artist: { type: String, required: true, trim: true },
   duration: { type: String, required: true, trim: true },
   plays: { type: Number, default: 0, min: 0 },
+  genres: { type: [String], default: [] },
+  moods: { type: [String], default: [] },
   image: { type: String, default: '' },
   audioUrl: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now }

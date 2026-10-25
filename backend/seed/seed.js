@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import Song from '../models/Song.js';
 import Artist from '../models/Artist.js';
 import Album from '../models/Album.js';
+import { withDefaultSongTags } from './songMetadata.js';
 
 dotenv.config();
 
@@ -168,7 +169,7 @@ async function seedDatabase() {
     await Artist.deleteMany({});
     await Album.deleteMany({});
 
-    await Song.insertMany(songs);
+    await Song.insertMany(songs.map(withDefaultSongTags));
     await Artist.insertMany(artists);
     await Album.insertMany(albums);
 

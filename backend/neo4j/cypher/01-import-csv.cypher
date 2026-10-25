@@ -1,67 +1,70 @@
-// Run with CSV files placed in Neo4j's import directory.
-// artists.csv: artistId,name
-// genres.csv: genreId,name
-// moods.csv: moodId,name
-// tracks.csv: trackId,title,artistId,duration,image,audioUrl,popularity,genreIds,moodIds
+// Put these files in the selected Neo4j DBMS Import folder.
+// artists.csv: artistId,name,image
+// tracks.csv: trackId,title,artistId,duration,image,audioUrl,popularity,genres,moods
 // users.csv: userId,username
 // plays.csv: userId,trackId,playCount,lastPlayedAt
-// genreIds and moodIds are pipe-delimited MongoDB IDs, for example "id1|id2".
+// genres and moods are pipe-delimited names, for example "V-pop|Dance-pop".
+// Run 00-schema.cypher before this script.
 
 LOAD CSV WITH HEADERS FROM 'file:///users.csv' AS row
+WITH row WHERE trim(coalesce(row.userId, '')) <> ''
 MERGE (u:User {mongoId: trim(row.userId)})
 SET u.username = row.username;
 
 LOAD CSV WITH HEADERS FROM 'file:///artists.csv' AS row
+WITH row WHERE trim(coalesce(row.artistId, '')) <> ''
 MERGE (a:Artist {mongoId: trim(row.artistId)})
-SET a.name = row.name;
-
-LOAD CSV WITH HEADERS FROM 'file:///genres.csv' AS row
-MERGE (g:Genre {mongoId: trim(row.genreId)})
-SET g.name = row.name;
-
-LOAD CSV WITH HEADERS FROM 'file:///moods.csv' AS row
-MERGE (m:Mood {mongoId: trim(row.moodId)})
-SET m.name = row.name;
+SET a.name = row.name,
+    a.image = coalesce(row.image, '');
 
 LOAD CSV WITH HEADERS FROM 'file:///tracks.csv' AS row
+WITH row WHERE trim(coalesce(row.trackId, '')) <> ''
 MERGE (t:Track {mongoId: trim(row.trackId)})
 SET t.title = row.title,
-    t.duration = row.duration,
-    t.image = row.image,
-    t.audioUrl = row.audioUrl,
+    t.duration = coalesce(row.duration, ''),
+    t.image = coalesce(row.image, ''),
+    t.audioUrl = coalesce(row.audioUrl, ''),
     t.popularity = CASE
       WHEN trim(coalesce(row.popularity, '')) = '' THEN 0
       ELSE toInteger(row.popularity)
     END;
 
 LOAD CSV WITH HEADERS FROM 'file:///tracks.csv' AS row
+WITH row WHERE trim(coalesce(row.trackId, '')) <> ''
 MATCH (a:Artist {mongoId: trim(row.artistId)})
 MATCH (t:Track {mongoId: trim(row.trackId)})
 MERGE (a)-[:PERFORMED]->(t);
 
 LOAD CSV WITH HEADERS FROM 'file:///tracks.csv' AS row
+WITH row WHERE trim(coalesce(row.trackId, '')) <> ''
 MATCH (t:Track {mongoId: trim(row.trackId)})
 WITH t, row,
-     CASE WHEN trim(coalesce(row.genreIds, '')) = ''
+     CASE WHEN trim(coalesce(row.genres, '')) = ''
        THEN []
-       ELSE [id IN split(row.genreIds, '|') WHERE trim(id) <> '']
-     END AS genreIds
-UNWIND genreIds AS genreId
-MATCH (g:Genre {mongoId: trim(genreId)})
+       ELSE [name IN split(row.genres, '|') WHERE trim(name) <> '']
+     END AS genreNames
+UNWIND genreNames AS genreName
+MERGE (g:Genre {mongoId: toLower(trim(genreName))})
+SET g.name = trim(genreName)
 MERGE (t)-[:IN_GENRE]->(g);
 
 LOAD CSV WITH HEADERS FROM 'file:///tracks.csv' AS row
+WITH row WHERE trim(coalesce(row.trackId, '')) <> ''
 MATCH (t:Track {mongoId: trim(row.trackId)})
 WITH t, row,
-     CASE WHEN trim(coalesce(row.moodIds, '')) = ''
+     CASE WHEN trim(coalesce(row.moods, '')) = ''
        THEN []
-       ELSE [id IN split(row.moodIds, '|') WHERE trim(id) <> '']
-     END AS moodIds
-UNWIND moodIds AS moodId
-MATCH (m:Mood {mongoId: trim(moodId)})
+       ELSE [name IN split(row.moods, '|') WHERE trim(name) <> '']
+     END AS moodNames
+UNWIND moodNames AS moodName
+MERGE (m:Mood {mongoId: toLower(trim(moodName))})
+SET m.name = trim(moodName)
 MERGE (t)-[:HAS_MOOD]->(m);
 
 LOAD CSV WITH HEADERS FROM 'file:///plays.csv' AS row
+WITH row
+WHERE trim(coalesce(row.userId, '')) <> ''
+  AND trim(coalesce(row.trackId, '')) <> ''
 MATCH (u:User {mongoId: trim(row.userId)})
 MATCH (t:Track {mongoId: trim(row.trackId)})
 MERGE (u)-[r:LISTENED_TO]->(t)

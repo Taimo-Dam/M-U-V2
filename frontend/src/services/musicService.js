@@ -63,6 +63,19 @@ export async function getHistory(token) {
   return response.data;
 }
 
+export async function fetchRecommendations(token) {
+  const response = await api.get('/recommendations', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+}
+
+export async function fetchSmartPlaylist(trackId, token) {
+  const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+  const response = await api.get(`/smart-playlist/${trackId}`, config);
+  return response.data;
+}
+
 export async function searchMusic(query) {
   const response = await api.get(`/search?q=${encodeURIComponent(query)}`);
   return response.data;

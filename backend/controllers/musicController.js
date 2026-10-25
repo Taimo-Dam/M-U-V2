@@ -1,7 +1,10 @@
+import mongoose from 'mongoose';
 import Album from '../models/Album.js';
 import Artist from '../models/Artist.js';
 import Song from '../models/Song.js';
 import User from '../models/User.js';
+import ListeningHistory from '../models/ListeningHistory.js';
+import { syncListen, syncTrack } from '../services/graphService.js';
 
 export async function getSongs(req, res, next) {
   try {
@@ -82,6 +85,9 @@ export async function getSongsByArtist(req, res, next) {
 export async function recordPlay(req, res, next) {
   try {
     const songId = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(songId)) {
+      return res.status(400).json({ message: 'Song ID is invalid' });
+    }
     
     // 1. Increment global plays
     const song = await Song.findByIdAndUpdate(songId, { $inc: { plays: 1 } }, { new: true });
@@ -89,9 +95,15 @@ export async function recordPlay(req, res, next) {
       return res.status(404).json({ message: 'Song not found' });
     }
 
+    let graphSynced = true;
     // 2. If user is logged in, add to history
     if (req.user) {
       const user = await User.findById(req.user._id);
+      if (!user) {
+        return res.status(401).json({ message: 'Not authorized, user no longer exists' });
+      }
+
+      await ListeningHistory.create({ user: user._id, song: songId });
       
       // Remove previous play of this song to avoid duplicates in history
       user.listeningHistory = user.listeningHistory.filter(h => h.song.toString() !== songId);
@@ -105,9 +117,23 @@ export async function recordPlay(req, res, next) {
       }
       
       await user.save();
+
+      try {
+        await syncListen(user, song);
+      } catch (error) {
+        graphSynced = false;
+        console.error('Failed to sync play to Neo4j; run `npm run graph:sync` to reconcile:', error);
+      }
+    } else {
+      try {
+        await syncTrack(song);
+      } catch (error) {
+        graphSynced = false;
+        console.error('Failed to sync song popularity to Neo4j; run `npm run graph:sync` to reconcile:', error);
+      }
     }
 
-    res.json({ message: 'Play recorded', plays: song.plays });
+    res.json({ message: 'Play recorded', plays: song.plays, graphSynced });
   } catch (error) {
     next(error);
   }

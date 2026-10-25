@@ -38,6 +38,37 @@
   gap: 25px;
 }
 
+.smart-playlist-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.smart-playlist-controls select,
+.smart-playlist-controls button {
+  min-height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 0 14px;
+  color: #ffffff;
+  background: #171721;
+}
+
+.smart-playlist-controls select {
+  min-width: min(100%, 320px);
+}
+
+.smart-playlist-controls button {
+  cursor: pointer;
+  background: linear-gradient(110deg, #b000b5, #008b9b);
+}
+
+.smart-playlist-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .artist-card {
   text-align: center;
   cursor: pointer;
